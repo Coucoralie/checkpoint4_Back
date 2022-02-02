@@ -32,7 +32,19 @@ app.get('/produits', (req,res) => {
   })
 });
 
+// Categories
 
+// AllCategories
+
+app.get('/categories', (req,res) => {
+  db.query('SELECT * FROM categories')
+  .then(result => {
+    res.status(200).send(result[0]);
+  })
+  .catch(err => {
+    res.status(404).send('Error retrieving categories from database')
+  })
+});
 
 
 
