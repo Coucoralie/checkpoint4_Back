@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const connection = require('./db-config');
 
 // Verif connection to BDD
@@ -13,6 +14,7 @@ connection.connect((err) => {
 
 //Routes
 const db = connection.promise();
+app.use(cors())
 app.use(express.json())
 
 const port = process.env.PORT || 5000;
