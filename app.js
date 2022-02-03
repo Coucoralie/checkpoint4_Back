@@ -34,7 +34,14 @@ app.get('/produits', (req,res) => {
 
 // OneProduit
 app.get('/produits/:id', (req, res) => {
-  res.send('Hello');
+  const produitId = req.params.id;
+  db.query('SELECT * FROM produits WHERE id = ?', [produitId])
+  .then(result => {
+    res.status(200).send(result[0]);
+  })
+  .catch(err => {
+    res.status(404).send('Error retrieving produits from database')
+  })
 });
 
 // Categories
