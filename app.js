@@ -56,6 +56,16 @@ app.post('/produits/', (req, res) => {
   })
 });
 
+// UpdateProduit
+app.put('/produits/:id', (req, res) => {
+  db.query('UPDATE produits SET ? WHERE id = ?', [req.body, req.params.id])
+  .then(result => {
+    res.status(204).send({...req.body});
+  })
+  .catch(err => {
+    res.status(404).send('Error retrieving produits from database')
+  })
+});
 
 // Categories
 
