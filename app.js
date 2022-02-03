@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const connection = require('./db-config');
 
 // Verif connection to BDD
@@ -13,6 +14,7 @@ connection.connect((err) => {
 
 //Routes
 const db = connection.promise();
+app.use(cors())
 app.use(express.json())
 
 const port = process.env.PORT || 5000;
@@ -30,7 +32,19 @@ app.get('/produits', (req,res) => {
   })
 });
 
+// Categories
 
+// AllCategories
+
+app.get('/categories', (req,res) => {
+  db.query('SELECT * FROM categories')
+  .then(result => {
+    res.status(200).send(result[0]);
+  })
+  .catch(err => {
+    res.status(404).send('Error retrieving categories from database')
+  })
+});
 
 
 
