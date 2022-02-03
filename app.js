@@ -32,6 +32,11 @@ app.get('/produits', (req,res) => {
   })
 });
 
+// OneProduit
+app.get('/produits/:id', (req, res) => {
+  res.send('Hello');
+});
+
 // Categories
 
 // AllCategories
