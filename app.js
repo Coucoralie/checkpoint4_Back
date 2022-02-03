@@ -44,6 +44,18 @@ app.get('/produits/:id', (req, res) => {
   })
 });
 
+// CreateProduit
+app.post('/produits/', (req, res) => {
+  const {name, quantite, description, image, prix, id_categories} = req.body;
+  db.query('INSERT INTO produits (name, quantite, description, image, prix) VALUES (?, ?, ?, ?, ?)', [name, quantite, description, image, prix, id_categories])
+  .then(result => {
+    res.status(201).send({id : result[0].insertId, ...req.body});
+  })
+  .catch(err => {
+    res.status(404).send('Error retrieving produits from database')
+  })
+});
+
 
 // Categories
 
